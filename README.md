@@ -7,6 +7,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | # | Tool | Lab |
 |---|------|-----|
 | 1 | Maven | [Java app: test, package, run](Build%20Tools/Lab1/README.md) |
+| 2 | Gradle | [Same app rebuilt with Gradle](Build%20Tools/Lab2/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 
