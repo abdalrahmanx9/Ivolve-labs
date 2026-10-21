@@ -1,0 +1,38 @@
+# Stage 1: Build stage using full Maven and JDK on Alpine Linux
+#   AS build: Names this intermediate stage so artifacts can be referenced later via --from=build
+FROM maven:3.9.15-eclipse-temurin-17-alpine AS build
+
+# Sets working directory inside build container:
+WORKDIR /app
+
+# Copies source code and pom.xml into build container:
+COPY . .
+
+# Packages application JAR:
+#   -B / --batch-mode: Disables interactive download progress animations
+RUN mvn package -B
+
+# Stage 2: Runtime stage using minimal JRE (avoids bundling compiler and build tools into production image)
+FROM eclipse-temurin:17-jre-alpine
+
+# Create non-root system group and user in Alpine:
+#   addgroup -S : Creates system group with a low GID
+#   adduser -S  : Creates system user without password
+#   -G app      : Assigns user to the 'app' group
+RUN addgroup -S app && adduser -S app -G app
+
+WORKDIR /app
+
+# Copies compiled JAR from build stage:
+#   --from=build       : Copies only the compiled artifact from the first stage, leaving all build tools behind
+#   --chown=app:app    : Sets ownership during copy without needing an extra layer of 'RUN chown'
+COPY --from=build --chown=app:app /app/target/demo-0.0.1-SNAPSHOT.jar app.jar
+
+# Drop root privileges:
+USER app
+
+# Document container listening port:
+EXPOSE 8080
+
+# Starts application using JSON exec form (runs as PID 1 to receive UNIX signals like SIGTERM properly):
+ENTRYPOINT ["java", "-jar", "app.jar"]
