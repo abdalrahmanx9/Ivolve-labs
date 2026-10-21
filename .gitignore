@@ -2,3 +2,5 @@ target/
 build/
 .gradle/
 *.class
+*.tar
+Docker/Lab5/report-*.html
