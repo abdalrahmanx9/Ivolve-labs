@@ -12,6 +12,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 4 | Docker | [Multi-stage optimization, save/load](Docker/Lab4/README.md) |
 | 5 | Docker | [Trivy vulnerability scanning + remediation](Docker/Lab5/README.md) |
 | 6 | Docker | [Env vars and resource limits](Docker/Lab6/README.md) |
+| 7 | Docker | [Multi-network microservices + volumes](Docker/Lab7/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 
