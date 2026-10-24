@@ -1,0 +1,13 @@
+[Unit]
+Description=containerd (k8s-isolated instance)
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/containerd -c /etc/containerd-k8s/config.toml
+Restart=always
+RestartSec=5
+Delegate=yes
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

@@ -14,6 +14,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 6 | Docker | [Env vars and resource limits](Docker/Lab6/README.md) |
 | 7 | Docker | [Multi-network microservices + volumes](Docker/Lab7/README.md) |
 | 8 | Docker Compose | [Node.js + MySQL stack, pushed to Docker Hub](Docker/Lab8/README.md) |
+| 9 | Kubernetes | [Kubeadm cluster: control plane + worker, Calico](Kubernetes/Lab9/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 

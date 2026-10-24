@@ -1,0 +1,14 @@
+version = 2
+root = "/var/lib/containerd-k8s"
+state = "/run/containerd-k8s"
+
+[grpc]
+  address = "/run/containerd-k8s/containerd.sock"
+
+[plugins."io.containerd.grpc.v1.cri"]
+  sandbox_image = "registry.k8s.io/pause:3.10"
+  [plugins."io.containerd.grpc.v1.cri".containerd]
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+          SystemdCgroup = true
