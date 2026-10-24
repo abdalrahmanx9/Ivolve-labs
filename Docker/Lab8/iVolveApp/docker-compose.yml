@@ -1,0 +1,48 @@
+# Docker Compose multi-container application specification
+services:
+  app:
+    # Build context: builds custom Node.js application image from local Dockerfile
+    build: .
+    # Port mapping: host_port:container_port
+    ports:
+      - "3000:3000"
+    # Runtime environment variables injected into application container:
+    environment:
+      DB_HOST: db            # Discovered via Compose internal DNS service name 'db'
+      DB_USER: ivolve
+      DB_PASSWORD: ivolve123
+      DB_NAME: ivolve
+    # Named volume mount preserving application logs across restarts:
+    volumes:
+      - app_logs:/app/logs
+    # Startup dependency: ensures database container starts before app
+    depends_on:
+      - db
+    # User-defined bridge network providing automated DNS resolution:
+    networks:
+      - ivolve-net
+
+  db:
+    # Official MySQL 8.0 image:
+    image: mysql:8.0
+    # Credentials to initialize MySQL database instance:
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: ivolve
+      MYSQL_USER: ivolve
+      MYSQL_PASSWORD: ivolve123
+    # Persistent storage volume for MySQL tables and transaction logs:
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - ivolve-net
+
+# Bridge network allowing inter-container DNS and traffic:
+networks:
+  ivolve-net:
+    name: ivolve-net
+
+# Named persistent volumes managed by Docker Engine:
+volumes:
+  app_logs:
+  db_data:
