@@ -14,7 +14,7 @@ EXPOSE 5000
 CMD ["python", "app.py"]
 ```
 
-Note: something else on this machine already owns host port 5000, so containers publish on 5001/5002/5003 → 5000. Container port is still 5000.
+Note: something else on the host already owned port 5000, so containers publish on 5001/5002/5003 → 5000. Container port is still 5000.
 
 ## 1. Build + run with `-e` flags and resource limits
 
