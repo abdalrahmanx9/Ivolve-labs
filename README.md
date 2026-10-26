@@ -18,6 +18,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 10 | Kubernetes | [Node isolation: taints and labels](Kubernetes/Lab10/README.md) |
 | 11 | Kubernetes | [Namespace and ResourceQuota](Kubernetes/Lab11/README.md) |
 | 12 | Kubernetes | [ConfigMaps and Secrets](Kubernetes/Lab12/README.md) |
+| 13 | Kubernetes | [Persistent Volume and Claim](Kubernetes/Lab13/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 
