@@ -17,6 +17,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 9 | Kubernetes | [Kubeadm cluster: control plane + worker, Calico](Kubernetes/Lab9/README.md) |
 | 10 | Kubernetes | [Node isolation: taints and labels](Kubernetes/Lab10/README.md) |
 | 11 | Kubernetes | [Namespace and ResourceQuota](Kubernetes/Lab11/README.md) |
+| 12 | Kubernetes | [ConfigMaps and Secrets](Kubernetes/Lab12/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 
