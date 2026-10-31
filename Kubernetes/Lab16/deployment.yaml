@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ivolve-app
+  namespace: ivolve
+  labels:
+    app: ivolve-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ivolve-app
+  template:
+    metadata:
+      labels:
+        app: ivolve-app
+    spec:
+      nodeSelector:
+        project: ivolve
+      tolerations:
+        - key: workload
+          operator: Equal
+          value: ivolveApp
+          effect: NoSchedule
+      containers:
+        - name: app
+          image: abdalrahmanx/ivolve-app:v1
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: ivolve-cm
+            - secretRef:
+                name: ivolve-secret
+          volumeMounts:
+            - name: app-logs
+              mountPath: /app/logs
+          resources:
+            requests:
+              cpu: "1"
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+      volumes:
+        - name: app-logs
+          persistentVolumeClaim:
+            claimName: ivolve-pvc
