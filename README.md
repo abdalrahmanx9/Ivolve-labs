@@ -24,6 +24,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 16 | Kubernetes | [Resource requests and limits](Kubernetes/Lab16/README.md) |
 | 17 | Kubernetes | [NetworkPolicy: app pods to MySQL](Kubernetes/Lab17/README.md) |
 | 18 | Kubernetes | [Monitoring: Prometheus, Grafana, node-exporter](Kubernetes/Lab18/README.md) |
+| 19 | Kubernetes | [RBAC and service accounts](Kubernetes/Lab19/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 
