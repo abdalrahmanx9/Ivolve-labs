@@ -23,6 +23,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 15 | Kubernetes | [Node.js deployment with ClusterIP service](Kubernetes/Lab15/README.md) |
 | 16 | Kubernetes | [Resource requests and limits](Kubernetes/Lab16/README.md) |
 | 17 | Kubernetes | [NetworkPolicy: app pods to MySQL](Kubernetes/Lab17/README.md) |
+| 18 | Kubernetes | [Monitoring: Prometheus, Grafana, node-exporter](Kubernetes/Lab18/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 
