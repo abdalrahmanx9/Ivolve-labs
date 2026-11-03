@@ -1,0 +1,52 @@
+@Library('ivolve-lib') _
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build app') {
+            agent {
+                docker {
+                    image 'maven:3.9-eclipse-temurin-17'
+                    // -v: Mounts persistent named volume caching Maven dependencies (~/.m2) across pipeline runs
+                    args '-v ivolve-maven-repo:/root/.m2'
+                    // reuseNode true: Keeps the execution inside the same workspace directory
+                    reuseNode true
+                }
+            }
+            steps {
+                dir('Jenkins/Lab21/DemoApp') {
+                    buildApp()
+                }
+            }
+        }
+
+        stage('Build and push image') {
+            steps {
+                script {
+                    buildImage("abdalrahmanx/ivolve-demoapp:${env.BUILD_NUMBER}")
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    deployOnK8s("abdalrahmanx/ivolve-demoapp:${env.BUILD_NUMBER}")
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Build ${BUILD_NUMBER} finished"
+        }
+        success {
+            echo "Pipeline succeeded - ivolve-demoapp:${BUILD_NUMBER} deployed"
+        }
+        failure {
+            echo "Pipeline failed - check the stage logs"
+        }
+    }
+}
