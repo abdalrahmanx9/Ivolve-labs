@@ -27,6 +27,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 19 | Kubernetes | [RBAC and service accounts](Kubernetes/Lab19/README.md) |
 | 20 | Jenkins | [Users and role-based authorization](Jenkins/Lab20/README.md) |
 | 21 | Jenkins | [CI/CD pipeline: build to deploy](Jenkins/Lab21/README.md) |
+| 22 | Jenkins | [Shared libraries and agent](Jenkins/Lab22/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 
