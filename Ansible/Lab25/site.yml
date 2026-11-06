@@ -1,0 +1,45 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install docker
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+        update_cache: true
+
+    - name: install java and gnupg (jenkins dependencies)
+      ansible.builtin.apt:
+        name:
+          - openjdk-17-jre-headless
+          - gnupg
+        state: present
+
+    - name: add jenkins repository key
+      ansible.builtin.get_url:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+        dest: /usr/share/keyrings/jenkins-keyring.asc
+        mode: "0644"
+        force: true
+
+    - name: dearmor the jenkins key
+      ansible.builtin.command: "gpg --dearmor --yes -o /usr/share/keyrings/jenkins-keyring.gpg /usr/share/keyrings/jenkins-keyring.asc"
+      args:
+        creates: /usr/share/keyrings/jenkins-keyring.gpg
+
+    - name: add jenkins repository
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/"
+        state: present
+        filename: jenkins
+
+    - name: install jenkins
+      ansible.builtin.apt:
+        name: jenkins
+        state: present
+
+    - name: install kubectl
+      ansible.builtin.get_url:
+        url: https://dl.k8s.io/release/v1.33.13/bin/linux/amd64/kubectl
+        dest: /usr/local/bin/kubectl
+        mode: "0755"
