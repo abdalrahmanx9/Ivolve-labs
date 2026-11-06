@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ivolve
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/abdalrahmanx9/Ivolve-labs.git
+    targetRevision: main
+    path: Jenkins/Lab21
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ivolve
+  syncPolicy:
+    automated:
+      selfHeal: true

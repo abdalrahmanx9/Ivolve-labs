@@ -28,6 +28,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 20 | Jenkins | [Users and role-based authorization](Jenkins/Lab20/README.md) |
 | 21 | Jenkins | [CI/CD pipeline: build to deploy](Jenkins/Lab21/README.md) |
 | 22 | Jenkins | [Shared libraries and agent](Jenkins/Lab22/README.md) |
+| 23 | Argo CD | [GitOps: Jenkins pushes git, Argo CD syncs](ArgoCD/Lab23/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 

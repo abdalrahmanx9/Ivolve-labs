@@ -24,6 +24,21 @@ if (env.DOCKERHUB_USER && env.DOCKERHUB_TOKEN) {
     }
 }
 
+// github push token from runtime env - the pipeline commits deployment updates to git (gitops)
+if (env.GITHUB_TOKEN) {
+    def existingGh = SystemCredentialsProvider.getInstance().credentials.find { it.id == 'github-push' }
+    if (existingGh == null) {
+        store.addCredentials(
+            com.cloudbees.plugins.credentials.domains.Domain.global(),
+            new UsernamePasswordCredentialsImpl(
+                CredentialsScope.GLOBAL, 'github-push', 'GitHub push credentials (ArgoCD gitops flow)',
+                'jenkins', env.GITHUB_TOKEN
+            )
+        )
+        println 'credentials.groovy: github-push credential added'
+    }
+}
+
 // kubeconfig mounted from the host (kind cluster, jenkins-sa service account)
 def kcPath = env.KUBECONFIG_HOST_PATH ?: '/var/jenkins_extra/kubeconfig'
 if (Files.exists(Paths.get(kcPath))) {
