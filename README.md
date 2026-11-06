@@ -31,6 +31,7 @@ Labs from the Ivolve DevOps training. Each lab folder holds the actual working f
 | 23 | Argo CD | [GitOps: Jenkins pushes git, Argo CD syncs](ArgoCD/Lab23/README.md) |
 | 24 | Ansible | [Setup, key transfer, ad-hoc commands](Ansible/Lab24/README.md) |
 | 25 | Ansible | [Playbook: Docker, Kubectl, Jenkins](Ansible/Lab25/README.md) |
+| 26 | Ansible | [Structured roles](Ansible/Lab26/README.md) |
 
 More as the course goes: Docker, Kubernetes, Jenkins, ArgoCD, Ansible.
 

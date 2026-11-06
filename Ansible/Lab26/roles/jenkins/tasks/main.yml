@@ -1,0 +1,30 @@
+---
+- name: install java and gnupg (jenkins dependencies)
+  ansible.builtin.apt:
+    name:
+      - openjdk-17-jre-headless
+      - gnupg
+    state: present
+
+- name: add jenkins repository key
+  ansible.builtin.get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+    mode: "0644"
+    force: true
+
+- name: dearmor the jenkins key
+  ansible.builtin.command: "gpg --dearmor --yes -o /usr/share/keyrings/jenkins-keyring.gpg /usr/share/keyrings/jenkins-keyring.asc"
+  args:
+    creates: /usr/share/keyrings/jenkins-keyring.gpg
+
+- name: add jenkins repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/"
+    state: present
+    filename: jenkins
+
+- name: install jenkins
+  ansible.builtin.apt:
+    name: jenkins
+    state: present
