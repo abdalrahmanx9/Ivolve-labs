@@ -1,0 +1,40 @@
+---
+- name: install mysql server and pymysql (for the mysql modules)
+  ansible.builtin.apt:
+    name:
+      - mysql-server
+      - python3-pymysql
+    state: present
+    update_cache: true
+
+- name: start mysql (no systemd in the lab container)
+  ansible.builtin.command: service mysql start
+  changed_when: false
+
+- name: create the ivolve database
+  community.mysql.mysql_db:
+    name: ivolve
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: create ivolveuser with all privileges on ivolve
+  community.mysql.mysql_user:
+    name: ivolveuser
+    host: "%"
+    password: "{{ vault_mysql_password }}"
+    priv: "ivolve.*:ALL"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: validate - connect as ivolveuser and list databases
+  community.mysql.mysql_info:
+    login_user: ivolveuser
+    login_password: "{{ vault_mysql_password }}"
+    login_host: 127.0.0.1
+    filter: databases
+  register: dbcheck
+  changed_when: false
+
+- name: show validation result
+  ansible.builtin.debug:
+    msg: "databases visible to ivolveuser: {{ dbcheck.databases | list }}"
