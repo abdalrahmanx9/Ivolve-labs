@@ -2,3 +2,8 @@ target/
 build/
 .gradle/
 *.class
+*.tar
+Docker/Lab5/report-*.html
+Jenkins/Lab22/lib/
+__pycache__/
+*.pyc

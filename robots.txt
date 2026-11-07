@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abdalrahmanx9.github.io/Ivolve-labs/sitemap.xml
