@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install docker
+      ansible.builtin.dnf:
+        name: docker
+        state: present
+
+    - name: start and enable docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: docker version
+      ansible.builtin.command: docker --version
+      register: dv
+      changed_when: false
+
+    - name: show result
+      ansible.builtin.debug:
+        msg: "{{ ansible_hostname }} -> {{ dv.stdout }}"
